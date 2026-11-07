@@ -4,7 +4,7 @@
 
 Play a song on your PC and its lyrics float around you in 3D, perfectly in sync, word by word. Classic, Neon or Scattered: pick a style and sing along.
 
-Mod Fabric (tylko klient) dla Minecraft 1.21.1–1.21.11. Pokazuje w świecie 3D tekst piosenki odtwarzanej na komputerze (Spotify i inne odtwarzacze widoczne w sesjach multimediów Windows), zsynchronizowany z muzyką, z animacją słów. Wygląd, animacje, tryby (Cały wers, Słowo po słowie, Rozsypane), komety i edytor z podglądem na żywo odpowiadają modułowi Lyrics 3D z BKClient.
+Mod Fabric (tylko klient) dla Minecraft 1.21.1–1.21.11. Pokazuje w świecie 3D tekst piosenki odtwarzanej na komputerze (Spotify i inne odtwarzacze widoczne w sesjach multimediów Windows), zsynchronizowany z muzyką, z animacją słów. Tryby: Cały wers, Słowo po słowie, Rozsypane; do tego komety i edytor z podglądem na żywo.
 
 Teksty z czasami: lrc.red (czasy słów), LRCLIB, NetEase, Musixmatch. Mod jest darmowy, autor: bkubiakdev (https://bkubiak.dev/mods); przy pierwszym uruchomieniu pokazuje jednorazowo prośbę o wsparcie, a edytor ma link https://donate.bkubiak.dev.
 

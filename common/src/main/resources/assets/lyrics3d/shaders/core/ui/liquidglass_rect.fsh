@@ -27,7 +27,6 @@ uniform float GlassInnerGlowSize;
 uniform vec4  GlassInnerGlowColor;
 uniform float Time;
 uniform float GlobalAlpha;
-// Reconstructed GUI effects: SystemSRC provides settings, not these shader formulas.
 uniform float GuiEffects;
 uniform float GlassEnabled;
 uniform float PanelOpacity;
