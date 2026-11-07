@@ -1,0 +1,47 @@
+{
+  "ui/1": {
+    "sounds": [
+      "lyrics3d:ui/1"
+    ]
+  },
+  "ui/2": {
+    "sounds": [
+      "lyrics3d:ui/2"
+    ]
+  },
+  "ui/2f": {
+    "sounds": [
+      "lyrics3d:ui/2f"
+    ]
+  },
+  "ui/3": {
+    "sounds": [
+      "lyrics3d:ui/3"
+    ]
+  },
+  "ui/3f": {
+    "sounds": [
+      "lyrics3d:ui/3f"
+    ]
+  },
+  "ui/4": {
+    "sounds": [
+      "lyrics3d:ui/4"
+    ]
+  },
+  "ui/4f": {
+    "sounds": [
+      "lyrics3d:ui/4f"
+    ]
+  },
+  "ui/5": {
+    "sounds": [
+      "lyrics3d:ui/5"
+    ]
+  },
+  "ui/6": {
+    "sounds": [
+      "lyrics3d:ui/6"
+    ]
+  }
+}

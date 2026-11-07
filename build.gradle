@@ -1,0 +1,75 @@
+plugins {
+    id 'fabric-loom' version '1.15-SNAPSHOT' apply false
+}
+
+group = project.maven_group
+version = project.mod_version
+
+configure(subprojects.findAll { it.name.startsWith('v1.') }) {
+    apply plugin: 'java'
+    apply plugin: 'fabric-loom'
+
+    def key = name.substring(1).replace('.', '_')
+    def mc = rootProject.property("ver_${key}_minecraft")
+    // Render layer: 1.21.2-1.21.4 delegate to RenderSystem; 1.21.5+ draw with GlStateManager/OpenGL.
+    def minor = mc.tokenize('.')[2] as int
+    def compatDirs = minor >= 5 ? [rootProject.file('compat/rawgl/java')] : minor >= 2 ? [rootProject.file('compat/shaderkey/java')] : [rootProject.file('compat/legacy/java')]
+    // Vanilla-font glyphs: Minecraft's immediate buffers up to 1.21.5, captured glyph quads later.
+    compatDirs += rootProject.file(minor >= 11 ? 'compat/glyphs-drawable/java' : minor >= 9 ? 'compat/glyphs-drawable-1219/java' : minor >= 6 ? 'compat/glyphs-baked/java' : 'compat/glyphs-immediate/java')
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+    tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8'; options.release = 21; options.compilerArgs += ['-Xmaxerrs', '3000'] }
+
+    repositories {
+        maven { url 'https://maven.fabricmc.net/' }
+        maven { url 'https://maven.terraformersmc.com/releases/' }
+        mavenCentral()
+    }
+
+    sourceSets {
+        main {
+            java { srcDirs = [file('src/main/java'), rootProject.file('common/src/main/java')] + compatDirs }
+            resources { srcDirs = [file('src/main/resources'), rootProject.file('common/src/main/resources')] }
+        }
+    }
+
+    loom {
+        runs {
+            client {
+                runDir = 'run'
+                programArgs '--username', 'Lyrics3DTest', '--width', '1280', '--height', '720'
+                if (project.hasProperty('smoke')) { vmArg '-Dlyrics3d.smoke=true'; if (project.hasProperty('live')) vmArg '-Dlyrics3d.smoke.live=true'; vmArg "-Dlyrics3d.smoke.prefix=${project.findProperty('smoke')}" }
+                if (project.hasProperty('world')) programArgs '--quickPlaySingleplayer', project.property('world')
+            }
+        }
+    }
+
+    dependencies {
+        minecraft "com.mojang:minecraft:${mc}"
+        mappings "net.fabricmc:yarn:${rootProject.property("ver_${key}_yarn")}:v2"
+        modImplementation "net.fabricmc:fabric-loader:${rootProject.loader_version}"
+        modImplementation "net.fabricmc.fabric-api:fabric-api:${rootProject.property("ver_${key}_fabric")}"
+        modCompileOnly('com.terraformersmc:modmenu:13.0.3') { transitive = false }
+        compileOnly 'org.projectlombok:lombok:1.18.38'
+        annotationProcessor 'org.projectlombok:lombok:1.18.38'
+    }
+
+    processResources {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        def props = [version: rootProject.version, mc_range: rootProject.property("ver_${key}_range")]
+        inputs.properties props
+        filesMatching('fabric.mod.json') { expand props }
+    }
+
+    base { archivesName = 'Lyrics3D' }
+    version = "${rootProject.version}+mc${mc}"
+    tasks.withType(Jar).configureEach { duplicatesStrategy = DuplicatesStrategy.EXCLUDE; exclude 'dev/bkubiak/lyrics3d/dev/**' }
+}
+
+tasks.register('buildAll') {
+    group = 'build'
+    dependsOn subprojects.findAll { it.name.startsWith('v1.') }.collect { ":${it.name}:build" }
+}

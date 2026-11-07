@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "lyrics3d",
+  "version": "${version}",
+  "name": "Lyrics3D",
+  "description": "Synced lyrics of the song playing on your PC (Spotify and other Windows media players), shown in the 3D world. Word-by-word animations, Classic, Neon and Scattered styles, live editor (Right Shift) and /lyrics commands. Lyrics: lrc.red, LRCLIB, NetEase, Musixmatch.",
+  "authors": ["bkubiakdev"],
+  "contact": {
+    "homepage": "https://bkubiak.dev/mods"
+  },
+  "license": "LicenseRef-Proprietary",
+  "icon": "assets/lyrics3d/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["dev.bkubiak.lyrics3d.Lyrics3DClient"],
+    "modmenu": ["dev.bkubiak.lyrics3d.compat.ModMenuEntry"]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "${mc_range}",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "modmenu": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.donate": "https://donate.bkubiak.dev",
+        "modmenu.website": "https://bkubiak.dev/mods"
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+pluginManagement {
+    repositories {
+        maven { name = 'Fabric'; url = 'https://maven.fabricmc.net/' }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'Lyrics3D'
+
+file('.').eachDir { dir ->
+    if (dir.name ==~ /v1\.21\.\d+/ && new File(dir, 'build.gradle').exists() || dir.name ==~ /v1\.21\.\d+/ && new File(dir, 'src').exists()) include dir.name
+}
