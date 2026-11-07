@@ -1,6 +1,6 @@
 # Lyrics3D
 
-**Lyrics from your favourite music, right in your Minecraft world.**
+**Text from your favourite music in Minecraft.**
 
 Play a song on your PC and its lyrics float around you in 3D, perfectly in sync, word by word. Classic, Neon or Scattered: pick a style and sing along.
 
