@@ -12,8 +12,8 @@ Teksty z czasami: lrc.red (czasy słów), LRCLIB, NetEase, Musixmatch. Mod jest 
 
 - Prawy Shift (do zmiany w Sterowaniu) albo Mod Menu → Configure: edytor tekstów.
 - Klawisz „Włącz/wyłącz teksty” (domyślnie bez przypisania).
-- Komenda `/lyrics`: `on`, `off`, `toggle`, `editor`, `status`, `donate`, `preview on|off`, `preset classic|neon|scattered`, `offset [ms]`.
-- Język moda: polski (gdy gra jest po polsku) albo angielski.
+- Komenda `/lyrics`: `language pl|en|auto`, `pl`, `en`, `on`, `off`, `toggle`, `editor`, `status`, `donate`, `preview on|off`, `preset classic|neon|scattered`, `offset [ms]`.
+- Język moda: polski (gdy gra jest po polsku) albo angielski; `/lyrics language pl|en|auto` (albo skróty `/lyrics pl`, `/lyrics en`) ustawia go niezależnie od gry; `auto` wraca do języka gry.
 - Ustawienia: `config/lyrics3d.json`, stan edytora (format i paleta kolorów): `config/lyrics3d-ui.json`.
 - Wymaga Fabric API. Mod Menu opcjonalnie.
 

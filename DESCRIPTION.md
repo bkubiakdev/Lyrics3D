@@ -16,7 +16,7 @@ Lyrics3D shows the lyrics of the song you're listening to right in your Minecraf
 * Previous lines can stay on screen for a moment
 * Sync offset if the lyrics come in a bit early or late
 * `/lyrics` commands
-* English and Polish
+* English and Polish (follows your game language, or pick one with `/lyrics language en|pl`)
 
 ## How It Works
 
@@ -35,6 +35,7 @@ If a song doesn't have timed lyrics anywhere, nothing shows up. Most popular son
 * `/lyrics preset classic|neon|scattered`
 * `/lyrics offset <ms>` - moves the lyrics earlier or later
 * `/lyrics preview on|off` - test lines without music
+* `/lyrics language en|pl|auto` - mod language (`auto` follows your game), `/lyrics en` and `/lyrics pl` work too
 * `/lyrics donate`
 
 ## Requirements

@@ -8,7 +8,9 @@ import org.joml.Vector3d;
 
 /** Bounded sample verses owned by the editor; layout and effects match the world renderer. */
 public final class LyricsPreviewScene implements AutoCloseable {
-    private static final String[] TEXT={"Muzyka zostawia ślad", "Słowa płyną przez świat", "Każdy wers ma swoje miejsce", "Zażółć gęślą jaźń — Привет ЇЄІҐ"};
+    private static final int LINES=4;
+    /** Sample verses in the mod language (lang keys lyrics.editor.sample1..4). */
+    private static String text(long n){return dev.bkubiak.lyrics3d.systems.localization.Localizator.translate("lyrics.editor.sample"+(n%LINES+1));}
     public static final int VERSE_MS=4000;
     public final LyricsRenderer renderer=new LyricsRenderer();
     private final Map<Long,LyricsVerse> verses=new HashMap<>();
@@ -24,7 +26,7 @@ public final class LyricsPreviewScene implements AutoCloseable {
             float age=positionMs-start-VERSE_MS,life=o.historyTime.getCurrentValue()*1000;
             if(rank>0&&age>=life)continue;
             LyricsVerse v=verses.computeIfAbsent(number,n->new LyricsVerse(
-                new LyricsTimeline.Cue((int)(n%TEXT.length),TEXT[(int)(n%TEXT.length)],start,start+VERSE_MS),
+                new LyricsTimeline.Cue((int)(n%LINES),text(n),start,start+VERSE_MS),
                 new LyricsPose(new Vector3d(),new Quaternionf()),0));
             v.ensureLayout(o,renderer.fonts.metrics(LyricsOptions.id(o.font)));
             if(rank==0){

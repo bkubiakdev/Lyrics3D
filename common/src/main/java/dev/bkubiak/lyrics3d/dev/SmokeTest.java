@@ -80,6 +80,7 @@ public final class SmokeTest {
          }
          case 140 -> {
             mc.inGameHud.getChatHud().clear(false);
+            mc.player.networkHandler.sendChatCommand("lyrics language en");
             mc.player.networkHandler.sendChatCommand("lyrics status");
             mc.player.networkHandler.sendChatCommand("lyrics offset 0");
             mc.player.networkHandler.sendChatCommand("lyrics");

@@ -32,8 +32,18 @@ public final class Lyrics3D extends BaseModule {
     public final SliderSetting distance=options.distance,height=options.height,size=options.size,opacity=options.opacity,offset=options.offset,animation=options.animation;
     public final ColorSetting color=options.color;
     public final BooleanSetting shadow=options.shadow,throughWalls=options.throughWalls,approximate=options.approximate,preview=options.preview;
-    private static final SyncedLyrics PREVIEW=SyncedLyrics.parseLrc(
-        "[00:00.00]Muzyka zostawia ślad\n[00:04.00]Słowa płyną przez świat\n[00:08.00]Zatrzymaj się na chwilę\n[00:12.00]To jest podgląd napisów");
+    /** World preview lines in the mod language (lang keys lyrics.preview.line1..4). */
+    private static SyncedLyrics previewLyrics;
+    private static String previewLanguage="";
+    private static SyncedLyrics preview(){
+        String lang=dev.bkubiak.lyrics3d.systems.localization.Localizator.getCurrentLanguage().getCode();
+        if(previewLyrics==null||!lang.equals(previewLanguage)){
+            StringBuilder lrc=new StringBuilder();
+            for(int i=0;i<4;i++)lrc.append(String.format("[00:%02d.00]%s%n",i*4,dev.bkubiak.lyrics3d.systems.localization.Localizator.translate("lyrics.preview.line"+(i+1))));
+            previewLyrics=SyncedLyrics.parseLrc(lrc.toString());previewLanguage=lang;
+        }
+        return previewLyrics;
+    }
     private final LyricsRenderer renderer=new LyricsRenderer();
     private final Deque<LyricsVerse> history=new ArrayDeque<>();
     private ClientWorld world;
@@ -71,7 +81,7 @@ public final class Lyrics3D extends BaseModule {
         MusicTracker.LyricsPlayback playback;
         if(preview.isEnabled()) {
             if(previewStart==0)previewStart=now;
-            playback=new MusicTracker.LyricsPlayback("lyrics3d:preview",PREVIEW,(now-previewStart)/1_000_000%16000,16000,true);
+            playback=new MusicTracker.LyricsPlayback("lyrics3d:preview:"+previewLanguage,preview(),(now-previewStart)/1_000_000%16000,16000,true);
         } else {
             var tracker=Lyrics3DClient.getInstance().getMusicTracker();if(tracker==null){clear();return;}
             tracker.setApproximateLyrics(approximate.isEnabled());playback=tracker.getLyricsPlayback();

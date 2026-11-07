@@ -27,6 +27,12 @@ public final class LyricsCommands {
          .then(literal("editor").executes(LyricsCommands::editor))
          .then(literal("status").executes(LyricsCommands::status))
          .then(literal("donate").executes(LyricsCommands::donate))
+         .then(literal("language")
+            .then(literal("pl").executes(c -> language(c, "pl_pl")))
+            .then(literal("en").executes(c -> language(c, "en_us")))
+            .then(literal("auto").executes(c -> language(c, null))))
+         .then(literal("pl").executes(c -> language(c, "pl_pl")))
+         .then(literal("en").executes(c -> language(c, "en_us")))
          .then(literal("preview")
             .then(literal("on").executes(c -> preview(c, true)))
             .then(literal("off").executes(c -> preview(c, false))))
@@ -50,6 +56,11 @@ public final class LyricsCommands {
       reply(c, "lyrics.command.state", tr(client().getModule().isEnabled() ? "lyrics.command.on" : "lyrics.command.off"));
       reply(c, "lyrics.command.help");
       return donate(c);
+   }
+
+   private static int language(CommandContext<FabricClientCommandSource> c, String code) {
+      client().setLanguage(code);
+      return reply(c, code == null ? "lyrics.command.language_auto" : "lyrics.command.language");
    }
 
    private static int donate(CommandContext<FabricClientCommandSource> c) {

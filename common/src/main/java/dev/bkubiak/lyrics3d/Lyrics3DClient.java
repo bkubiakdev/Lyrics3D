@@ -40,6 +40,8 @@ public final class Lyrics3DClient implements ClientModInitializer {
    private boolean loading;
    private boolean donatePrompted;
    private String language = "";
+   /** "pl_pl" or "en_us" chosen with /lyrics pl|en; null follows the game language. */
+   private String languageOverride;
    private KeyBinding editorKey, toggleKey;
 
    public static Identifier id(String path) { return Identifier.of(MOD_ID, path); }
@@ -103,8 +105,15 @@ public final class Lyrics3DClient implements ClientModInitializer {
       Platform.openLink(parent, DONATE_URL);
    }
 
+   /** Language of the mod independent of the game: "pl_pl" or "en_us". */
+   public void setLanguage(String code) {
+      languageOverride = code;
+      syncLanguage(MinecraftClient.getInstance());
+      saveConfig();
+   }
+
    private void syncLanguage(MinecraftClient client) {
-      String code = client.options == null ? "en_us" : client.options.language;
+      String code = languageOverride != null ? languageOverride : client.options == null ? "en_us" : client.options.language;
       if (code.equals(language)) return;
       language = code;
       Language next = switch (code) {
@@ -123,6 +132,10 @@ public final class Lyrics3DClient implements ClientModInitializer {
          JsonObject json = Files.exists(path) ? JsonParser.parseString(Files.readString(path, StandardCharsets.UTF_8)).getAsJsonObject() : new JsonObject();
          module.setEnabled(!json.has("enabled") || json.get("enabled").getAsBoolean());
          donatePrompted = json.has("donatePrompted") && json.get("donatePrompted").getAsBoolean();
+         if (json.has("language")) {
+            String code = json.get("language").getAsString();
+            if (code.equals("pl_pl") || code.equals("en_us")) languageOverride = code;
+         }
          if (json.has("settings")) module.loadSettings(json.getAsJsonObject("settings"));
       } catch (Exception error) {
          LOGGER.warn("Cannot read {}, using defaults", path, error);
@@ -135,6 +148,7 @@ public final class Lyrics3DClient implements ClientModInitializer {
       JsonObject json = new JsonObject();
       json.addProperty("enabled", module.isEnabled());
       json.addProperty("donatePrompted", donatePrompted);
+      if (languageOverride != null) json.addProperty("language", languageOverride);
       json.add("settings", module.saveSettings());
       Path path = configPath();
       try {
