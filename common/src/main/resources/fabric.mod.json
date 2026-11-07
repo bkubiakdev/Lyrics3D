@@ -3,7 +3,7 @@
   "id": "lyrics3d",
   "version": "${version}",
   "name": "Lyrics3D",
-  "description": "Synced lyrics of the song playing on your PC (Spotify and other Windows media players), shown in the 3D world. Word-by-word animations, Classic, Neon and Scattered styles, live editor (Right Shift) and /lyrics commands. Lyrics: lrc.red, LRCLIB, NetEase, Musixmatch.",
+  "description": "Lyrics from your favourite music, right in your Minecraft world. Play a song on your PC (Spotify or any Windows media player) and its lyrics float around you in 3D, perfectly in sync, word by word. Classic, Neon and Scattered styles, live editor (Right Shift) and /lyrics commands. Free, by bkubiakdev. Lyrics: lrc.red, LRCLIB, NetEase, Musixmatch.",
   "authors": ["bkubiakdev"],
   "contact": {
     "homepage": "https://bkubiak.dev/mods"
