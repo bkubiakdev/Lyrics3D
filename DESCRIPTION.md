@@ -53,3 +53,5 @@ Lyrics3D is client-side only, so it works on any server and nobody else sees you
 The mod is free. If you like it, you can support it here: https://donate.bkubiak.dev
 
 Made by bkubiakdev: https://bkubiak.dev/mods
+
+Source code (MIT): https://github.com/bkubiakdev/Lyrics3D

@@ -50,3 +50,7 @@ JAR-y: `v1.21.x/build/libs/Lyrics3D-1.0.0+mc1.21.x.jar`.
 ## Test w grze
 
 `.\gradlew.bat :v1.21.11:runClient -Pworld=TestWorld -Psmoke=nazwa` przechodzi przez tryby Classic, Neon, Rozsypane, podążanie za kamerą i edytor. Zapisuje zrzuty w `v1.21.x/run/screenshots`. Klasy testowe (`dev/bkubiak/lyrics3d/dev`) nie trafiają do JAR-a.
+
+## Licencja
+
+MIT, zobacz [LICENSE](LICENSE).

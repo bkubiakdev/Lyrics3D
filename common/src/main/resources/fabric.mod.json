@@ -6,9 +6,11 @@
   "description": "Text from your favourite music in Minecraft. Play a song on your PC (Spotify or any Windows media player) and its lyrics float around you in 3D, perfectly in sync, word by word. Classic, Neon and Scattered styles, live editor (Right Shift) and /lyrics commands. Free, by bkubiakdev. Lyrics: lrc.red, LRCLIB, NetEase, Musixmatch.",
   "authors": ["bkubiakdev"],
   "contact": {
-    "homepage": "https://bkubiak.dev/mods"
+    "homepage": "https://bkubiak.dev/mods",
+    "sources": "https://github.com/bkubiakdev/Lyrics3D",
+    "issues": "https://github.com/bkubiakdev/Lyrics3D/issues"
   },
-  "license": "LicenseRef-Proprietary",
+  "license": "MIT",
   "icon": "assets/lyrics3d/icon.png",
   "environment": "client",
   "entrypoints": {
